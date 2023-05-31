@@ -22,3 +22,16 @@ jobs:
 
       - name: execute py script # run main.py
         run: python main.py
+
+      - name: push data files
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+  
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Update Documentation"
+            git push
+          else
+            echo "no changes";
+          fi
